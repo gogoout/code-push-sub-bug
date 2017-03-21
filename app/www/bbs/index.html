@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class = "no-js in-cordova">
+<head>
+  <meta charset = "utf-8"/>
+  <meta name = "viewport" content = "width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0.0"/>
+  <meta name = "apple-mobile-web-app-capable" content = "yes">
+  <meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1">
+  <meta name = "renderer" content = "webkit|ie-stand|ie-comp">
+  <title><!-- server:title --></title>
+</head>
+<body>
+<h1>bbs/index.html</h1>
+<script type = "application/javascript">
+  alert('bbs/index.html');
+  function onDeviceReady() {
+    if (typeof codePush !== 'undefined') {
+      codePush.getCurrentPackage(function (package) {
+        console.log('===local package===');
+        console.log(package);
+      });
+      codePush.sync(function (syncStatus) {
+        if (syncStatus === SyncStatus.UPDATE_INSTALLED) {
+          navigator.notification.alert('update complete', null, 'update info', 'OK');
+        }
+      });
+    }
+  }
+  document.addEventListener("deviceready", onDeviceReady, false);
+</script>
+</body>
+<!-- server:state -->
+<script src = "../cordova.js"></script>
+</html>

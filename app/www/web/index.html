@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html class = "no-js in-cordova">
+<head>
+  <title><!-- server:title --></title>
+</head>
+<body>
+<h1>web/index.html</h1>
+<script type="application/javascript">
+  alert('web/index.html');
+  function onDeviceReady() {
+    if (typeof codePush !== 'undefined') {
+      codePush.getCurrentPackage(function (package) {
+        console.log('===local package===');
+        console.log(package);
+      });
+      codePush.sync(function (syncStatus) {
+        if (syncStatus === SyncStatus.UPDATE_INSTALLED) {
+          navigator.notification.alert('updated', null, 'info', 'OK');
+        }
+      });
+    }
+  }
+  document.addEventListener("deviceready", onDeviceReady, false);
+</script>
+</body>
+<!-- server:state -->
+<script src="../cordova.js"></script>
